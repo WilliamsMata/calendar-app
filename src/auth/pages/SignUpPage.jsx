@@ -6,7 +6,7 @@ export const SignUpPage = () => {
       <h1 className="font-bold tracking-tight">Sign Up</h1>
       <form className="space-y-4 md:space-y-6" action="#">
         <div>
-          <label htmlFor="email" className="mb-2 block text-sm font-medium  ">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium  ">
             Your name
           </label>
           <input
