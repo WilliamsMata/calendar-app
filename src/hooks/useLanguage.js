@@ -7,5 +7,5 @@ export const useLanguage = () => {
     setLanguage(window.navigator.language);
   }, []);
 
-  return language;
+  return language.substring(0, 2);
 };

@@ -22,7 +22,7 @@ export const Navbar = () => {
 
         <button id="logout-btn" className="btn-outline btn-error btn gap-2">
           <img src="logout.svg" alt="logout btn" className="h-6 w-6" />
-          {language.substring(0, 2) === "es" ? "Salir" : "Logout"}
+          {language === "es" ? "Salir" : "Logout"}
         </button>
       </div>
     </div>
