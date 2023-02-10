@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
+import { getLoginMessageEN, getLoginMessageES } from "../../helpers";
+import { useLanguage } from "../../hooks";
 
 export const LoginPage = () => {
+  const language = useLanguage();
+
+  const { title, email, password, button, text, link } =
+    language === "es" ? getLoginMessageES() : getLoginMessageEN();
+
   return (
     <>
-      <h1 className="font-bold tracking-tight">Log in to your account</h1>
+      <h1 className="font-bold tracking-tight">{title}</h1>
       <form className="space-y-4 md:space-y-6" action="#">
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-medium">
-            Your email
+            {email}
           </label>
           <input
             type="email"
@@ -23,7 +30,7 @@ export const LoginPage = () => {
             htmlFor="password"
             className="mb-2 block text-sm font-medium  "
           >
-            Password
+            {password}
           </label>
           <input
             type="password"
@@ -35,15 +42,15 @@ export const LoginPage = () => {
           />
         </div>
         <button type="submit" className="btn-primary btn w-full">
-          Sign in
+          {button}
         </button>
         <p className="text-sm font-light">
-          Don’t have an account yet?{" "}
+          {text}
           <Link
             to="/auth/signup"
-            className="font-medium text-primary hover:underline"
+            className="text-base font-medium text-accent transition hover:text-accent-focus hover:underline"
           >
-            Sign up
+            {link}
           </Link>
         </p>
       </form>
