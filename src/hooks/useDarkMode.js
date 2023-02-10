@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 
 export const useDarkMode = () => {
   const [darkMode, setDarkMode] = useState(undefined);
+  const htmlElement = document.querySelector("html");
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   useEffect(() => {
-    const htmlElement = document.querySelector("html");
-    if (darkMode) {
-      localStorage.setItem("darkMode", "true");
-      htmlElement.setAttribute("data-theme", "dark");
-    } else if (darkMode === false) {
-      localStorage.setItem("darkMode", "false");
-      htmlElement.setAttribute("data-theme", "light");
+    if (darkMode === undefined) {
+      const storedDarkMode = localStorage.getItem("darkMode");
+      if (storedDarkMode === "true") {
+        setDarkMode(true);
+      } else if (storedDarkMode === "false") {
+        setDarkMode(false);
+      } else {
+        setDarkMode(isDarkMode);
+      }
     } else {
-      setDarkMode(localStorage.getItem("darkMode") === "true");
+      localStorage.setItem("darkMode", darkMode ? "true" : "false");
     }
+    htmlElement.setAttribute("data-theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
   const switchMode = () => {
