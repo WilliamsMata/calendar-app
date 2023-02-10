@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-base-200;
+  }
+
+  h1 {
+    @apply text-2xl md:text-4xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  h4 {
+    @apply text-lg;
+  }
+}
+
+@layer components {
+  #logout-btn:hover > img {
+    filter: brightness(0);
+  }
+}
