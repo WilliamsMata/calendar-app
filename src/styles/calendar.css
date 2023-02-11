@@ -133,7 +133,6 @@ html[data-theme="dark"] .rbc-rtl .rbc-header + .rbc-header {
   -moz-user-select: none;
   user-select: none;
   -webkit-user-select: none;
-  z-index: 4;
 }
 
 .rbc-row-content-scrollable {
@@ -330,7 +329,6 @@ html[data-theme="dark"] .rbc-today {
 
 .rbc-show-more {
   background-color: rgba(255, 255, 255, 0.3);
-  z-index: 4;
   font-weight: bold;
   font-size: 85%;
   height: auto;
@@ -427,7 +425,6 @@ html[data-theme="dark"] .rbc-rtl .rbc-day-bg + .rbc-day-bg {
 
 .rbc-overlay {
   position: absolute;
-  z-index: 5;
   border: 1px solid #e5e5e5;
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
@@ -622,7 +619,6 @@ html[data-theme="dark"] .rbc-day-slot .rbc-time-slot {
   left: 0;
   background-color: white;
   border-right: 1px solid #ddd;
-  z-index: 10;
   margin-right: -1px;
 }
 .rbc-time-view-resources .rbc-time-header {
@@ -662,7 +658,6 @@ html[data-theme="dark"] .rbc-day-slot .rbc-time-slot {
 }
 
 .rbc-slot-selection {
-  z-index: 10;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -707,7 +702,6 @@ html[data-theme="dark"] .rbc-time-view .rbc-allday-cell + .rbc-allday-cell {
 
 .rbc-time-view .rbc-allday-events {
   position: relative;
-  z-index: 4;
 }
 .rbc-time-view .rbc-row {
   box-sizing: border-box;
@@ -813,7 +807,6 @@ html[data-theme="dark"] .rbc-rtl .rbc-time-content > * + * > * {
 
 .rbc-current-time-indicator {
   position: absolute;
-  z-index: 3;
   left: 0;
   right: 0;
   height: 1px;

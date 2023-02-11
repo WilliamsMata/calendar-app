@@ -3,10 +3,11 @@ import { getLoginMessageEN, getLoginMessageES } from "../../helpers";
 import { useLanguage } from "../../hooks";
 
 export const LoginPage = () => {
-  const language = useLanguage();
+  const { isSpanish } = useLanguage();
 
-  const { title, email, password, button, text, link } =
-    language === "es" ? getLoginMessageES() : getLoginMessageEN();
+  const { title, email, password, button, text, link } = isSpanish
+    ? getLoginMessageES()
+    : getLoginMessageEN();
 
   return (
     <>

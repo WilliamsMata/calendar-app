@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Calendar } from "react-big-calendar";
 import { addHours } from "date-fns";
 
-import { CalendarEventBox, Navbar } from "../";
+import { CalendarEventBox, CalendarModal, Navbar } from "../";
 import { getMessageEN, getMessageES, localizer } from "../../helpers";
 import { useLanguage } from "../../hooks";
-import { useState } from "react";
 
 const events = [
   {
@@ -24,7 +24,7 @@ export const CalendarPage = () => {
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "month"
   );
-  const language = useLanguage();
+  const { isSpanish } = useLanguage();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
@@ -62,8 +62,8 @@ export const CalendarPage = () => {
         defaultView={lastView}
         startAccessor="start"
         endAccessor="end"
-        culture={language === "es" ? "es" : ""}
-        messages={language === "es" ? getMessageES() : getMessageEN()}
+        culture={isSpanish ? "es" : ""}
+        messages={isSpanish ? getMessageES() : getMessageEN()}
         eventPropGetter={eventStyleGetter}
         components={{
           event: CalendarEventBox,
@@ -73,6 +73,8 @@ export const CalendarPage = () => {
         onView={onViewChanged}
         style={{ height: "calc(100vh - 4rem)" }}
       />
+
+      <CalendarModal />
     </>
   );
 };

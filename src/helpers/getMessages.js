@@ -68,3 +68,51 @@ export const getSignUpMessageEN = () => {
     link: "Login",
   };
 };
+
+export const getFormMessageES = () => {
+  return {
+    titleForm: "Nuevo evento",
+    dateStart: {
+      label: "Fecha y hora de inicio",
+      placeholder: "Fecha de inicio",
+    },
+    dateEnd: {
+      label: "Fecha y hora final",
+      placeholder: "Fecha final",
+    },
+    eventTitle: {
+      label: "Titulo",
+      placeholder: "Titulo del evento",
+      altLabel: "Una descripción corta",
+    },
+    note: {
+      placeholder: "Notas",
+      altLabel: "Información adicional",
+    },
+    button: "Guardar",
+  };
+};
+
+export const getFormMessageEN = () => {
+  return {
+    titleForm: "New event",
+    dateStart: {
+      label: "Start date and time",
+      placeholder: "Start date",
+    },
+    dateEnd: {
+      label: "End date and time",
+      placeholder: "End date",
+    },
+    eventTitle: {
+      label: "Title",
+      placeholder: "Event title",
+      altLabel: "Short description",
+    },
+    note: {
+      placeholder: "Notes",
+      altLabel: "Additional information",
+    },
+    button: "Save",
+  };
+};

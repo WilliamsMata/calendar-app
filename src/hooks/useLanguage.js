@@ -7,5 +7,10 @@ export const useLanguage = () => {
     setLanguage(window.navigator.language);
   }, []);
 
-  return language.substring(0, 2);
+  const isSpanish = language.substring(0, 2) === "es";
+
+  return {
+    language: language,
+    isSpanish,
+  };
 };

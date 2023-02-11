@@ -25,4 +25,8 @@
   #logout-btn:hover > img {
     filter: brightness(0);
   }
+
+  #save-btn:hover > img {
+    filter: brightness(0);
+  }
 }

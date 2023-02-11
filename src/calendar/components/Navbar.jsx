@@ -2,7 +2,7 @@ import { useDarkMode, useLanguage } from "../../hooks";
 
 export const Navbar = () => {
   const { darkMode, switchMode } = useDarkMode();
-  const language = useLanguage();
+  const { isSpanish } = useLanguage();
 
   return (
     <div className="navbar bg-base-100">
@@ -22,7 +22,7 @@ export const Navbar = () => {
 
         <button id="logout-btn" className="btn-outline btn-error btn gap-2">
           <img src="logout.svg" alt="logout btn" className="h-6 w-6" />
-          {language === "es" ? "Salir" : "Logout"}
+          {isSpanish ? "Salir" : "Logout"}
         </button>
       </div>
     </div>

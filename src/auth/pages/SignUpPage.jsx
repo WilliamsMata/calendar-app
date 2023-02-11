@@ -3,10 +3,11 @@ import { getSignUpMessageEN, getSingUpMessageES } from "../../helpers";
 import { useLanguage } from "../../hooks";
 
 export const SignUpPage = () => {
-  const language = useLanguage();
+  const { isSpanish } = useLanguage();
 
-  const { title, name, email, password, button, text, link } =
-    language === "es" ? getSingUpMessageES() : getSignUpMessageEN();
+  const { title, name, email, password, button, text, link } = isSpanish
+    ? getSingUpMessageES()
+    : getSignUpMessageEN();
 
   return (
     <>
