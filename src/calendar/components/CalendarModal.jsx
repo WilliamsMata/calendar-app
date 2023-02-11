@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { addHours, differenceInSeconds } from "date-fns";
 import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 import {
   getFormMessageEN,
@@ -11,15 +14,14 @@ import {
   getSweetModalMessageEN,
   getSweetModalMessageES,
 } from "../../helpers";
-import { useLanguage } from "../../hooks";
-import "react-datepicker/dist/react-datepicker.css";
+import { useLanguage, useUiStore } from "../../hooks";
+import { onCloseDateModal } from "../../store/ui/uiSlice";
 
 registerLocale("es", es);
 
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -54,8 +56,10 @@ export const CalendarModal = () => {
     ? getFormMessageES()
     : getFormMessageEN();
 
+  const { isDateModalOpen, closeDateModal } = useUiStore();
+
   const onCloseModal = () => {
-    setIsOpen(false);
+    closeDateModal();
   };
 
   const onSubmit = (event) => {
@@ -97,7 +101,7 @@ export const CalendarModal = () => {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
       className="mx-2 w-full max-w-[30rem] rounded-lg bg-base-100 p-4 outline-none"
       overlayClassName="modal-fondo"

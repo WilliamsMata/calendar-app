@@ -4,7 +4,7 @@ import { addHours } from "date-fns";
 
 import { CalendarEventBox, CalendarModal, Navbar } from "../";
 import { getMessageEN, getMessageES, localizer } from "../../helpers";
-import { useLanguage } from "../../hooks";
+import { useLanguage, useUiStore } from "../../hooks";
 
 const events = [
   {
@@ -21,9 +21,12 @@ const events = [
 ];
 
 export const CalendarPage = () => {
+  const { openDateModal } = useUiStore();
+
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "month"
   );
+
   const { isSpanish } = useLanguage();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -40,7 +43,7 @@ export const CalendarPage = () => {
   };
 
   const onDoubleClick = (event) => {
-    console.log({ doubleClick: event });
+    openDateModal();
   };
 
   const onSelect = (event) => {
