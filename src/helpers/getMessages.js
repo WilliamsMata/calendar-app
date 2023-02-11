@@ -116,3 +116,21 @@ export const getFormMessageEN = () => {
     button: "Save",
   };
 };
+
+export const getSweetModalMessageES = () => {
+  return {
+    error: {
+      title: "Fechas incorrectas",
+      text: "Revisar las fechas ingresadas",
+    },
+  };
+};
+
+export const getSweetModalMessageEN = () => {
+  return {
+    error: {
+      title: "Incorrect Dates",
+      text: "Please check the dates entered",
+    },
+  };
+};

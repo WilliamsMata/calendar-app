@@ -5,7 +5,12 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import Swal from "sweetalert2";
 
-import { getFormMessageEN, getFormMessageES } from "../../helpers";
+import {
+  getFormMessageEN,
+  getFormMessageES,
+  getSweetModalMessageEN,
+  getSweetModalMessageES,
+} from "../../helpers";
 import { useLanguage } from "../../hooks";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -57,6 +62,10 @@ export const CalendarModal = () => {
     event.preventDefault();
     setFormSubmitted(true);
 
+    const { error } = isSpanish
+      ? getSweetModalMessageES()
+      : getSweetModalMessageEN();
+
     const timeDifference = differenceInSeconds(
       formValues.end,
       formValues.start
@@ -64,8 +73,8 @@ export const CalendarModal = () => {
 
     if (isNaN(timeDifference) || timeDifference <= 0) {
       Swal.fire({
-        title: "Fechas incorrectas",
-        text: "Revisar las fechas ingresadas",
+        title: error.title,
+        text: error.text,
         icon: "error",
         buttonsStyling: false,
         width: "35rem",
