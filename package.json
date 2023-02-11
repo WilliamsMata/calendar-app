@@ -16,7 +16,8 @@
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "sweetalert2": "^11.7.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

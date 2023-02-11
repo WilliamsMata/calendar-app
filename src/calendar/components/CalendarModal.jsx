@@ -1,19 +1,21 @@
-import { addHours } from "date-fns";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Modal from "react-modal";
+import { addHours, differenceInSeconds } from "date-fns";
 import DatePicker, { registerLocale } from "react-datepicker";
+import es from "date-fns/locale/es";
+import Swal from "sweetalert2";
 
 import { getFormMessageEN, getFormMessageES } from "../../helpers";
 import { useLanguage } from "../../hooks";
 import "react-datepicker/dist/react-datepicker.css";
 
-import es from "date-fns/locale/es";
 registerLocale("es", es);
 
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formValues, setFormValues] = useState({
     title: "Williams",
@@ -21,6 +23,11 @@ export const CalendarModal = () => {
     start: new Date(),
     end: addHours(new Date(), 2),
   });
+
+  const titleClass = useMemo(() => {
+    if (!formSubmitted) return "";
+    return formValues.title.length > 0 ? "" : "input-error";
+  }, [formValues.title, formSubmitted]);
 
   const onInputChange = ({ target }) => {
     setFormValues({
@@ -46,6 +53,39 @@ export const CalendarModal = () => {
     setIsOpen(false);
   };
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+
+    const timeDifference = differenceInSeconds(
+      formValues.end,
+      formValues.start
+    );
+
+    if (isNaN(timeDifference) || timeDifference <= 0) {
+      Swal.fire({
+        title: "Fechas incorrectas",
+        text: "Revisar las fechas ingresadas",
+        icon: "error",
+        buttonsStyling: false,
+        width: "35rem",
+        customClass: {
+          confirmButton: "btn btn-outline btn-error",
+        },
+      });
+      document.querySelector("#date-end").classList.add("input-error");
+      return;
+    }
+
+    if (formValues.title.length <= 0) return;
+
+    console.log({ formValues });
+
+    //TODO:
+    // cerrar modal
+    // Remover errores en pantalla
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -55,11 +95,12 @@ export const CalendarModal = () => {
       closeTimeoutMS={200}
     >
       <h1>{titleForm}</h1>
-      <form className="container form-control w-full">
+      <form className="container form-control w-full" onSubmit={onSubmit}>
         <div className="border-b-2 border-base-200 pb-4">
           <div>
             <label className="label">{dateStart.label}</label>
             <DatePicker
+              id="date-start"
               selected={formValues.start}
               onChange={(event) => onDateChange(event, "start")}
               className="input-bordered input w-full"
@@ -73,6 +114,7 @@ export const CalendarModal = () => {
           <div>
             <label className="label">{dateEnd.label}</label>
             <DatePicker
+              id="date-end"
               minDate={formValues.start}
               selected={formValues.end}
               onChange={(event) => onDateChange(event, "end")}
@@ -93,7 +135,7 @@ export const CalendarModal = () => {
             <input
               id="event-title"
               type="text"
-              className="input-bordered input w-full"
+              className={`input-bordered input w-full ${titleClass}`}
               placeholder={eventTitle.placeholder}
               name="title"
               autoComplete="off"
