@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const useLanguage = () => {
   const [language, setLanguage] = useState("");
@@ -7,10 +7,12 @@ export const useLanguage = () => {
     setLanguage(window.navigator.language);
   }, []);
 
-  const isSpanish = language.substring(0, 2) === "es";
+  const isSpanish = useMemo(() => {
+    return language.substring(0, 2) === "es";
+  }, [language]);
 
   return {
-    language: language,
+    language,
     isSpanish,
   };
 };
