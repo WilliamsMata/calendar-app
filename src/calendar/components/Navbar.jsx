@@ -21,7 +21,11 @@ export const Navbar = () => {
         </button>
 
         <button id="logout-btn" className="btn-outline btn-error btn gap-2">
-          <img src="logout.svg" alt="logout btn" className="h-6 w-6" />
+          <img
+            src="logout.svg"
+            alt="logout btn"
+            className="h-6 w-6 transition"
+          />
           {isSpanish ? "Salir" : "Logout"}
         </button>
       </div>
