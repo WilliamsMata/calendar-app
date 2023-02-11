@@ -7,12 +7,12 @@ import {
 import { LoginPage, SignUpPage, AuthLayout } from "../auth";
 import { CalendarPage } from "../calendar";
 
-const authStatus = "not-authenticated";
+const authStatus = "authenticated";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      {authStatus === "authenticated" ? (
+      {authStatus === "not-authenticated" ? (
         <>
           <Route path="/auth/" element={<AuthLayout />}>
             <Route path="/auth/login" element={<LoginPage />} />
