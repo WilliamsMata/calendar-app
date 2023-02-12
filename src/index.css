@@ -29,4 +29,8 @@
   #save-btn:hover > img {
     filter: brightness(0);
   }
+
+  #add-new-btn:hover > img {
+    transform: rotate(90deg);
+  }
 }
