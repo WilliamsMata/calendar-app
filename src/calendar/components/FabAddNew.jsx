@@ -1,4 +1,4 @@
-import { addHours } from "date-fns";
+import { addDays, startOfDay } from "date-fns";
 import { useCalendarStore, useUiStore } from "../../hooks";
 
 export const FabAddNew = () => {
@@ -9,8 +9,8 @@ export const FabAddNew = () => {
     setActiveEvent({
       title: "",
       notes: "",
-      start: new Date(),
-      end: addHours(new Date(), 2),
+      start: startOfDay(new Date()),
+      end: startOfDay(addDays(new Date(), 1)),
       bgColor: "#fafafa",
       user: {
         _id: "123",
