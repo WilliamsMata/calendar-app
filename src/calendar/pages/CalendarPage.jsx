@@ -1,27 +1,13 @@
 import { useState } from "react";
 import { Calendar } from "react-big-calendar";
-import { addHours } from "date-fns";
 
 import { CalendarEventBox, CalendarModal, Navbar } from "../";
 import { getMessageEN, getMessageES, localizer } from "../../helpers";
-import { useLanguage, useUiStore } from "../../hooks";
-
-const events = [
-  {
-    title: "Cumpleaños del jefe",
-    notes: "Hay que comprar la torta",
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: "#fafafa",
-    user: {
-      _id: "123",
-      name: "Williams",
-    },
-  },
-];
+import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
+  const { events } = useCalendarStore();
 
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "month"
