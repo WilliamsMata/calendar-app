@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 //styles
 import "./styles/calendar.css";
 import "./styles/modal.css";
-import "sweetalert2/dist/sweetalert2.min.css";
 import "./index.css";
 
 import { router } from "./router";

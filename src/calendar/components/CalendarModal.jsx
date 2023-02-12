@@ -15,7 +15,6 @@ import {
   getSweetModalMessageES,
 } from "../../helpers";
 import { useLanguage, useUiStore } from "../../hooks";
-import { onCloseDateModal } from "../../store/ui/uiSlice";
 
 registerLocale("es", es);
 
