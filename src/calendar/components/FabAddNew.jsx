@@ -11,7 +11,7 @@ export const FabAddNew = () => {
       notes: "",
       start: startOfDay(new Date()),
       end: startOfDay(addDays(new Date(), 1)),
-      bgColor: "#fafafa",
+      bgColor: "#661ae6",
       user: {
         _id: "123",
         name: "Williams",

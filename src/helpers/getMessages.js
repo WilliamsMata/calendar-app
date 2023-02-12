@@ -92,6 +92,7 @@ export const getFormMessageES = () => {
       placeholder: "Notas",
       altLabel: "Información adicional",
     },
+    colorLabel: "Escoge un color",
     button: "Guardar",
   };
 };
@@ -119,6 +120,7 @@ export const getFormMessageEN = () => {
       placeholder: "Notes",
       altLabel: "Additional information",
     },
+    colorLabel: "Pick a color",
     button: "Save",
   };
 };

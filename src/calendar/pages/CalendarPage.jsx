@@ -23,7 +23,7 @@ export const CalendarPage = () => {
   //* EVENTS
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
-      backgroundColor: "#347CF7",
+      backgroundColor: event.bgColor,
       borderRadius: "0px",
       opacity: 0.8,
       color: "white",

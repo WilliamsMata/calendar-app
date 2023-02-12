@@ -33,6 +33,15 @@ const Toast = Swal.mixin({
   },
 });
 
+const colors = [
+  "#661ae6",
+  "#3abff8",
+  "#1fb2a5",
+  "#fbbd23",
+  "#f87272",
+  "#d926aa",
+];
+
 export const CalendarModal = () => {
   //* HOOKS
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -41,15 +50,22 @@ export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore();
 
   const { isSpanish } = useLanguage();
-  const { titleForm, dateStart, dateEnd, eventTitle, note, button } = isSpanish
-    ? getFormMessageES()
-    : getFormMessageEN();
+  const {
+    titleForm,
+    dateStart,
+    dateEnd,
+    eventTitle,
+    note,
+    colorLabel,
+    button,
+  } = isSpanish ? getFormMessageES() : getFormMessageEN();
 
   const [formValues, setFormValues] = useState({
     title: "Williams",
     notes: "Mata",
     start: new Date(),
     end: addHours(new Date(), 2),
+    bgColor: colors[0],
   });
 
   const titleClass = useMemo(() => {
@@ -126,6 +142,13 @@ export const CalendarModal = () => {
       title: savedModalMessage,
     });
     setFormSubmitted(false);
+  };
+
+  const handleColorClick = (color) => {
+    setFormValues({
+      ...formValues,
+      bgColor: color,
+    });
   };
 
   return (
@@ -213,10 +236,28 @@ export const CalendarModal = () => {
             </label>
           </div>
 
+          <div>
+            <label className="label">{colorLabel}</label>
+            <div className="mx-2 flex items-center justify-between gap-4">
+              {colors.map((color) => (
+                <div
+                  key={color}
+                  className={`h-8 w-16 cursor-pointer rounded-md border ${
+                    formValues.bgColor === color
+                      ? `outline outline-2 outline-offset-2`
+                      : ""
+                  }`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => handleColorClick(color)}
+                />
+              ))}
+            </div>
+          </div>
+
           <button
             id="save-btn"
             type="submit"
-            className="btn-outline btn-info btn-block btn"
+            className="btn-outline btn-info btn-block btn mt-2"
           >
             <img
               src="save.svg"
