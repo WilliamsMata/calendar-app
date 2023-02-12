@@ -71,7 +71,10 @@ export const getSignUpMessageEN = () => {
 
 export const getFormMessageES = () => {
   return {
-    titleForm: "Nuevo evento",
+    titleForm: {
+      newEvent: "Nuevo evento",
+      editEvent: "Editar evento",
+    },
     dateStart: {
       label: "Fecha y hora de inicio",
       placeholder: "Fecha de inicio",
@@ -95,7 +98,10 @@ export const getFormMessageES = () => {
 
 export const getFormMessageEN = () => {
   return {
-    titleForm: "New event",
+    titleForm: {
+      newEvent: "New event",
+      editEvent: "Edit event",
+    },
     dateStart: {
       label: "Start date and time",
       placeholder: "Start date",
