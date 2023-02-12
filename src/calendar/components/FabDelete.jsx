@@ -7,7 +7,8 @@ import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
 export const FabDelete = () => {
   const { isDateModalOpen } = useUiStore();
-  const { startDeletingEvent, hasEventSelected } = useCalendarStore();
+  const { startDeletingEvent, hasEventSelected, clearActiveEvent } =
+    useCalendarStore();
   const { isSpanish } = useLanguage();
 
   const { question, cancelled, deleted } = isSpanish
@@ -42,6 +43,8 @@ export const FabDelete = () => {
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       swalButtons.fire(cancelled.title, cancelled.text, "error");
     }
+
+    clearActiveEvent();
   };
 
   return (
