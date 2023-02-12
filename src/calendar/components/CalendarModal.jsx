@@ -155,11 +155,12 @@ export const CalendarModal = () => {
     <Modal
       isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
-      className="mx-2 w-full max-w-[30rem] rounded-lg bg-base-100 p-4 outline-none"
+      className="relative mx-2 w-full max-w-[30rem] rounded-lg bg-base-100 p-4 outline-none"
       overlayClassName="modal-fondo"
       closeTimeoutMS={200}
     >
       <h1>{activeEvent?._id ? titleForm.editEvent : titleForm.newEvent}</h1>
+
       <form className="container form-control w-full" onSubmit={onSubmit}>
         <div className="border-b-2 border-base-200 pb-4">
           <div>
@@ -268,6 +269,26 @@ export const CalendarModal = () => {
           </button>
         </div>
       </form>
+
+      <button
+        className="btn-outline btn-circle btn absolute top-5 right-4"
+        onClick={onCloseModal}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
     </Modal>
   );
 };
