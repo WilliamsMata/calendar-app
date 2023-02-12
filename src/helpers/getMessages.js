@@ -164,7 +164,7 @@ export const getDeleteSweetModalMessageES = () => {
     },
     cancelled: {
       title: "Cancelado",
-      text: "Tu evento esta a salvo :)",
+      text: "Tu evento está a salvo :)",
     },
     deleted: {
       title: "Eliminado!",
