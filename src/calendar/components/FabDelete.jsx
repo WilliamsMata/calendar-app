@@ -5,6 +5,16 @@ import {
 } from "../../helpers/getMessages";
 import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
+const swalButtons = Swal.mixin({
+  customClass: {
+    confirmButton:
+      "btn btn-info min-w-[5rem] mx-2 transition hover:brightness-110",
+    cancelButton:
+      "btn btn-error min-w-[5rem] mx-2 transition hover:brightness-110",
+  },
+  buttonsStyling: false,
+});
+
 export const FabDelete = () => {
   const { isDateModalOpen } = useUiStore();
   const { startDeletingEvent, hasEventSelected, clearActiveEvent } =
@@ -14,16 +24,6 @@ export const FabDelete = () => {
   const { question, cancelled, deleted } = isSpanish
     ? getDeleteSweetModalMessageES()
     : getDeleteSweetModalMessageEN();
-
-  const swalButtons = Swal.mixin({
-    customClass: {
-      confirmButton:
-        "btn btn-info min-w-[5rem] mx-2 transition hover:brightness-110",
-      cancelButton:
-        "btn btn-error min-w-[5rem] mx-2 transition hover:brightness-110",
-    },
-    buttonsStyling: false,
-  });
 
   const onDelete = async () => {
     const result = await swalButtons.fire({

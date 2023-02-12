@@ -12,15 +12,15 @@ import { getMessageEN, getMessageES, localizer } from "../../helpers";
 import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
 export const CalendarPage = () => {
-  const { openDateModal } = useUiStore();
-  const { events, setActiveEvent, clearActiveEvent } = useCalendarStore();
-
+  //* HOOKS
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "month"
   );
-
+  const { openDateModal } = useUiStore();
+  const { events, setActiveEvent, clearActiveEvent } = useCalendarStore();
   const { isSpanish } = useLanguage();
 
+  //* EVENTS
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
       backgroundColor: "#347CF7",
@@ -49,7 +49,7 @@ export const CalendarPage = () => {
     setLastView(event);
   };
 
-  const removeActiveEvent = () => {
+  const onNavigate = () => {
     clearActiveEvent();
   };
 
@@ -72,7 +72,7 @@ export const CalendarPage = () => {
         onDoubleClickEvent={onDoubleClick}
         onSelectEvent={onSelect}
         onView={onViewChanged}
-        onNavigate={removeActiveEvent}
+        onNavigate={onNavigate}
         style={{ height: "calc(100vh - 4rem)" }}
       />
 

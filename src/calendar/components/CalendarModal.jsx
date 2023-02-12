@@ -34,9 +34,16 @@ const Toast = Swal.mixin({
 });
 
 export const CalendarModal = () => {
+  //* HOOKS
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const { activeEvent, startSavingEvent, clearActiveEvent } =
     useCalendarStore();
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { isDateModalOpen, closeDateModal } = useUiStore();
+
+  const { isSpanish } = useLanguage();
+  const { titleForm, dateStart, dateEnd, eventTitle, note, button } = isSpanish
+    ? getFormMessageES()
+    : getFormMessageEN();
 
   const [formValues, setFormValues] = useState({
     title: "Williams",
@@ -56,6 +63,7 @@ export const CalendarModal = () => {
     }
   }, [activeEvent]);
 
+  //* EVENTS
   const onInputChange = ({ target }) => {
     setFormValues({
       ...formValues,
@@ -70,13 +78,6 @@ export const CalendarModal = () => {
       [changing]: event,
     });
   };
-
-  const { isSpanish } = useLanguage();
-  const { titleForm, dateStart, dateEnd, eventTitle, note, button } = isSpanish
-    ? getFormMessageES()
-    : getFormMessageEN();
-
-  const { isDateModalOpen, closeDateModal } = useUiStore();
 
   const onCloseModal = () => {
     closeDateModal();
