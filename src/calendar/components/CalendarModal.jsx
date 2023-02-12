@@ -96,6 +96,7 @@ export const CalendarModal = () => {
   };
 
   const onCloseModal = () => {
+    setFormSubmitted(false);
     closeDateModal();
     clearActiveEvent();
   };
