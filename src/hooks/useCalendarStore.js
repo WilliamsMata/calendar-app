@@ -28,7 +28,7 @@ export const useCalendarStore = () => {
     }
   };
 
-  const startDeletingEvent = () => {
+  const startDeletingEvent = async () => {
     //Todo: Llegar al backend
 
     dispatch(onDeleteEvent());

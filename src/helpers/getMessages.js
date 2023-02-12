@@ -134,3 +134,41 @@ export const getSweetModalMessageEN = () => {
     },
   };
 };
+
+export const getDeleteSweetModalMessageEN = () => {
+  return {
+    question: {
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      cancelBtn: "No, cancel!",
+      confirmBtn: "Yes, Delete it!",
+    },
+    cancelled: {
+      title: "Cancelled",
+      text: "Your event is safe :)",
+    },
+    deleted: {
+      title: "Deleted!",
+      text: "Your event has been deleted.",
+    },
+  };
+};
+
+export const getDeleteSweetModalMessageES = () => {
+  return {
+    question: {
+      title: "Estás seguro?",
+      text: "No podrás revertir esta acción!",
+      cancelBtn: "No, cancelar!",
+      confirmBtn: "Si, eliminar!",
+    },
+    cancelled: {
+      title: "Cancelado",
+      text: "Tu evento esta a salvo :)",
+    },
+    deleted: {
+      title: "Eliminado!",
+      text: "Tu evento ha sido eliminado.",
+    },
+  };
+};
