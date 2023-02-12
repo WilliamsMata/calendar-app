@@ -172,3 +172,11 @@ export const getDeleteSweetModalMessageES = () => {
     },
   };
 };
+
+export const getSavedEventModalMessageES = () => {
+  return "Guardado correctamente";
+};
+
+export const getSavedEventModalMessageEN = () => {
+  return "Saved successfully";
+};

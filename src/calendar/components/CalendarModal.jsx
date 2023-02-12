@@ -11,6 +11,8 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import {
   getFormMessageEN,
   getFormMessageES,
+  getSavedEventModalMessageEN,
+  getSavedEventModalMessageES,
   getSweetModalMessageEN,
   getSweetModalMessageES,
 } from "../../helpers";
@@ -19,6 +21,18 @@ import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 registerLocale("es", es);
 
 Modal.setAppElement("#root");
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
 export const CalendarModal = () => {
   const { activeEvent, startSavingEvent, clearActiveEvent } =
@@ -78,6 +92,10 @@ export const CalendarModal = () => {
       ? getSweetModalMessageES()
       : getSweetModalMessageEN();
 
+    const savedModalMessage = isSpanish
+      ? getSavedEventModalMessageES()
+      : getSavedEventModalMessageEN();
+
     const timeDifference = differenceInSeconds(
       formValues.end,
       formValues.start
@@ -102,6 +120,10 @@ export const CalendarModal = () => {
 
     await startSavingEvent(formValues);
     closeDateModal();
+    Toast.fire({
+      icon: "success",
+      title: savedModalMessage,
+    });
     setFormSubmitted(false);
   };
 
