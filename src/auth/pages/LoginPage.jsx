@@ -50,10 +50,7 @@ export const LoginPage = () => {
         </button>
         <p className="text-sm font-light">
           {text}
-          <Link
-            to="/auth/signup"
-            className="text-base font-medium text-accent transition hover:text-accent-focus hover:underline"
-          >
+          <Link to="/auth/signup" className="link-info link font-bold">
             {link}
           </Link>
         </p>
