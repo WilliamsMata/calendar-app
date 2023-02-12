@@ -120,6 +120,7 @@ export const CalendarModal = () => {
 
     await startSavingEvent(formValues);
     closeDateModal();
+    clearActiveEvent();
     Toast.fire({
       icon: "success",
       title: savedModalMessage,
