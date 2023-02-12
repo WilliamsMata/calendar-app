@@ -31,6 +31,34 @@
   }
 
   #add-new-btn:hover > img {
-    transform: rotate(90deg);
+    animation: add-pulse 500ms ease-in-out 2;
+  }
+
+  #delete-btn:hover > img {
+    animation: trash-shake 500ms ease-in-out;
+  }
+}
+
+@keyframes add-pulse {
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes trash-shake {
+  25% {
+    transform: rotate(35deg);
+  }
+
+  75% {
+    transform: rotate(-35deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
   }
 }
