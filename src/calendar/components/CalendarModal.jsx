@@ -21,7 +21,8 @@ registerLocale("es", es);
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
-  const { activeEvent, startSavingEvent } = useCalendarStore();
+  const { activeEvent, startSavingEvent, clearActiveEvent } =
+    useCalendarStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -66,6 +67,7 @@ export const CalendarModal = () => {
 
   const onCloseModal = () => {
     closeDateModal();
+    clearActiveEvent();
   };
 
   const onSubmit = async (event) => {

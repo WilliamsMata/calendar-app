@@ -4,6 +4,7 @@ import {
   onDeleteEvent,
   onSetActiveEvent,
   onUpdateEvent,
+  onClearActiveEvent,
 } from "../store";
 
 export const useCalendarStore = () => {
@@ -33,6 +34,10 @@ export const useCalendarStore = () => {
     dispatch(onDeleteEvent());
   };
 
+  const clearActiveEvent = () => {
+    dispatch(onClearActiveEvent());
+  };
+
   return {
     //* Properties
     activeEvent,
@@ -43,5 +48,6 @@ export const useCalendarStore = () => {
     setActiveEvent,
     startSavingEvent,
     startDeletingEvent,
+    clearActiveEvent,
   };
 };

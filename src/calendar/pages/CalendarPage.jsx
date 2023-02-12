@@ -13,7 +13,7 @@ import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, clearActiveEvent } = useCalendarStore();
 
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "month"
@@ -44,8 +44,13 @@ export const CalendarPage = () => {
   };
 
   const onViewChanged = (event) => {
+    clearActiveEvent();
     localStorage.setItem("lastView", event);
     setLastView(event);
+  };
+
+  const removeActiveEvent = () => {
+    clearActiveEvent();
   };
 
   return (
@@ -67,6 +72,7 @@ export const CalendarPage = () => {
         onDoubleClickEvent={onDoubleClick}
         onSelectEvent={onSelect}
         onView={onViewChanged}
+        onNavigate={removeActiveEvent}
         style={{ height: "calc(100vh - 4rem)" }}
       />
 
