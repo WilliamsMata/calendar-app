@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import { addHours, differenceInSeconds } from "date-fns";
@@ -14,13 +14,14 @@ import {
   getSweetModalMessageEN,
   getSweetModalMessageES,
 } from "../../helpers";
-import { useLanguage, useUiStore } from "../../hooks";
+import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
 
 registerLocale("es", es);
 
 Modal.setAppElement("#root");
 
 export const CalendarModal = () => {
+  const { activeEvent } = useCalendarStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -34,6 +35,12 @@ export const CalendarModal = () => {
     if (!formSubmitted) return "";
     return formValues.title.length > 0 ? "" : "input-error";
   }, [formValues.title, formSubmitted]);
+
+  useEffect(() => {
+    if (activeEvent !== null) {
+      setFormValues({ ...activeEvent });
+    }
+  }, [activeEvent]);
 
   const onInputChange = ({ target }) => {
     setFormValues({
