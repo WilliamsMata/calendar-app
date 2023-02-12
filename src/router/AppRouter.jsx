@@ -7,7 +7,7 @@ import {
 import { LoginPage, SignUpPage, AuthLayout } from "../auth";
 import { CalendarPage } from "../calendar";
 
-const authStatus = "authenticated";
+const authStatus = "not-authenticated";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

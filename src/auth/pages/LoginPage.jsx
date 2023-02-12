@@ -21,7 +21,7 @@ export const LoginPage = () => {
             type="email"
             name="email"
             id="email"
-            className="input-bordered input-primary input w-full"
+            className="input-bordered input-info input w-full"
             placeholder="name@company.com"
             required
           />
@@ -38,11 +38,14 @@ export const LoginPage = () => {
             name="password"
             id="password"
             placeholder="••••••••"
-            className="input-bordered input-primary input w-full"
+            className="input-bordered input-info input w-full"
             required
           />
         </div>
-        <button type="submit" className="btn-primary btn w-full">
+        <button
+          type="submit"
+          className="btn-info btn w-full transition hover:brightness-110"
+        >
           {button}
         </button>
         <p className="text-sm font-light">
