@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
+    "axios": "^1.3.3",
     "daisyui": "^2.50.0",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
