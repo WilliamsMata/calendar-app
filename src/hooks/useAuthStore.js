@@ -11,6 +11,8 @@ export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const isChecking = status === "checking";
+
   //* LOGIN
   const startLogin = async ({ email, password }) => {
     dispatch(onChecking());
@@ -63,14 +65,33 @@ export const useAuthStore = () => {
     }
   };
 
+  const checkAuthToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return dispatch(onLogout());
+
+    try {
+      const { data } = await calendarApi.get("/auth/renew");
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(onLogin({ name: data.name, uid: data.uid }));
+    } catch (error) {
+      localStorage.removeItem("token");
+      dispatch(onLogout());
+    }
+  };
+
   return {
     //* Properties
     status,
+    isChecking,
     user,
     errorMessage,
 
     //* Methods
     startLogin,
     startRegister,
+    checkAuthToken,
   };
 };
