@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { getSignUpMessageEN, getSingUpMessageES } from "../../helpers";
-import { useForm, useLanguage } from "../../hooks";
+import { useAuthStore, useForm, useLanguage } from "../../hooks";
 
 const registerFormFields = {
   registerName: "",
@@ -10,9 +12,21 @@ const registerFormFields = {
 };
 
 export const SignUpPage = () => {
+  const [isSamePassword, setIsSamePassword] = useState(true);
+  const { startRegister, errorMessage } = useAuthStore();
+
   const { isSpanish } = useLanguage();
-  const { title, name, email, password, repeatPassword, button, text, link } =
-    isSpanish ? getSingUpMessageES() : getSignUpMessageEN();
+  const {
+    title,
+    name,
+    email,
+    password,
+    repeatPassword,
+    button,
+    text,
+    link,
+    error,
+  } = isSpanish ? getSingUpMessageES() : getSignUpMessageEN();
 
   const {
     registerName,
@@ -22,13 +36,30 @@ export const SignUpPage = () => {
     onInputChange,
   } = useForm(registerFormFields);
 
+  useEffect(() => {
+    registerPassword !== registerPassword2
+      ? setIsSamePassword(false)
+      : setIsSamePassword(true);
+  }, [registerPassword, registerPassword2]);
+
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      Swal.fire("Error", errorMessage, "error");
+    }
+  }, [errorMessage]);
+
   const registerSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      registerName,
-      registerEmail,
-      registerPassword,
-      registerPassword2,
+
+    if (!isSamePassword) {
+      Swal.fire(error.samePassword.title, error.samePassword.text, "error");
+      return;
+    }
+
+    startRegister({
+      name: registerName,
+      email: registerEmail,
+      password: registerPassword,
     });
   };
 
@@ -46,7 +77,7 @@ export const SignUpPage = () => {
             name="registerName"
             value={registerName}
             onChange={onInputChange}
-            className="input-bordered input-info input w-full"
+            className={`input-bordered input-info input w-full`}
             placeholder={name}
             required
           />
@@ -101,7 +132,9 @@ export const SignUpPage = () => {
             value={registerPassword2}
             onChange={onInputChange}
             placeholder="••••••••"
-            className="input-bordered input-info input w-full"
+            className={`input-bordered input-info input w-full ${
+              isSamePassword ? "" : "input-error"
+            }`}
             required
           />
         </div>

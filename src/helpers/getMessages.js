@@ -63,6 +63,12 @@ export const getSingUpMessageES = () => {
     button: "Crear cuenta",
     text: "Ya tienes una cuenta? - ",
     link: "Iniciar sesión",
+    error: {
+      samePassword: {
+        title: "Error en registro",
+        text: "Las contraseñas no son iguales",
+      },
+    },
   };
 };
 
@@ -76,6 +82,12 @@ export const getSignUpMessageEN = () => {
     button: "Sign up",
     text: "Do you have an account? - ",
     link: "Login",
+    error: {
+      samePassword: {
+        title: "Sign in error",
+        text: "Password are not the same",
+      },
+    },
   };
 };
 

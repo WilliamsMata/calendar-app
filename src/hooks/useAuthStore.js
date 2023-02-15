@@ -11,6 +11,7 @@ export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  //* LOGIN
   const startLogin = async ({ email, password }) => {
     dispatch(onChecking());
 
@@ -29,6 +30,39 @@ export const useAuthStore = () => {
     }
   };
 
+  //* SIGNUP
+  const startRegister = async ({ name, email, password }) => {
+    dispatch(onChecking());
+
+    try {
+      const { data } = await calendarApi.post("/auth/new", {
+        name,
+        email,
+        password,
+      });
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("token-init-date", new Date().getTime());
+
+      dispatch(onLogin({ name: data.name, uid: data.uid }));
+    } catch (error) {
+      const { data } = error.response;
+
+      dispatch(
+        onLogout(
+          data?.msg ||
+            data?.errors?.name?.msg ||
+            data?.errors?.email?.msg ||
+            data?.errors?.password?.msg ||
+            "Error al crear una nueva cuenta"
+        )
+      );
+
+      setTimeout(() => {
+        dispatch(clearErrorMessage());
+      }, 10);
+    }
+  };
+
   return {
     //* Properties
     status,
@@ -37,5 +71,6 @@ export const useAuthStore = () => {
 
     //* Methods
     startLogin,
+    startRegister,
   };
 };
