@@ -31,6 +31,10 @@ export const getLoginMessageES = () => {
     button: "Iniciar sesión",
     text: "No tienes una cuenta? - ",
     link: "Crear cuenta",
+    error: {
+      errorTitle: "Error en la autenticación",
+      errorText: "Credenciales incorrectas",
+    },
   };
 };
 
@@ -42,6 +46,10 @@ export const getLoginMessageEN = () => {
     button: "Sign in",
     text: "Don’t have an account yet? - ",
     link: "Sign Up",
+    error: {
+      errorTitle: "Authentication failed",
+      errorText: "Incorrect credentials",
+    },
   };
 };
 

@@ -12,7 +12,7 @@ const loginFormFields = {
 
 export const LoginPage = () => {
   const { isSpanish } = useLanguage();
-  const { title, email, password, button, text, link } = isSpanish
+  const { title, email, password, button, text, link, error } = isSpanish
     ? getLoginMessageES()
     : getLoginMessageEN();
 
@@ -21,7 +21,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (errorMessage !== undefined) {
-      Swal.fire("Error en la autenticación", errorMessage, "error");
+      Swal.fire(error.errorTitle, errorMessage, "error");
     }
   }, [errorMessage]);
 
