@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import { getLoginMessageEN, getLoginMessageES } from "../../helpers";
-import { useForm, useLanguage } from "../../hooks";
+import { useAuthStore, useForm, useLanguage } from "../../hooks";
 
 const loginFormFields = {
   loginEmail: "",
@@ -14,10 +17,17 @@ export const LoginPage = () => {
     : getLoginMessageEN();
 
   const { loginEmail, loginPassword, onInputChange } = useForm(loginFormFields);
+  const { startLogin, errorMessage } = useAuthStore();
+
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      Swal.fire("Error en la autenticación", errorMessage, "error");
+    }
+  }, [errorMessage]);
 
   const loginSubmit = (event) => {
     event.preventDefault();
-    console.log({ loginEmail, loginPassword });
+    startLogin({ email: loginEmail, password: loginPassword });
   };
 
   return (
