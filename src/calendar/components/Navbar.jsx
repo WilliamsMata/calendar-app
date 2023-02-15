@@ -1,14 +1,16 @@
-import { useDarkMode, useLanguage } from "../../hooks";
+import { useAuthStore, useDarkMode, useLanguage } from "../../hooks";
 
 export const Navbar = () => {
   const { darkMode, switchMode } = useDarkMode();
   const { isSpanish } = useLanguage();
 
+  const { startLogout, user } = useAuthStore();
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex flex-1 items-center pl-2">
         <img src="calendar.svg" alt="calendar image" className="h-8 w-8" />
-        <p className="px-2 text-xl normal-case">Williams</p>
+        <p className="px-2 text-xl normal-case">{user.name}</p>
       </div>
 
       <div className="flex gap-4">
@@ -20,7 +22,11 @@ export const Navbar = () => {
           )}
         </button>
 
-        <button id="logout-btn" className="btn-outline btn-error btn gap-2">
+        <button
+          onClick={startLogout}
+          id="logout-btn"
+          className="btn-outline btn-error btn gap-2"
+        >
           <img
             src="logout.svg"
             alt="logout btn"

@@ -78,8 +78,15 @@ export const useAuthStore = () => {
       dispatch(onLogin({ name: data.name, uid: data.uid }));
     } catch (error) {
       localStorage.removeItem("token");
+      localStorage.removeItem("token-init-date");
       dispatch(onLogout());
     }
+  };
+
+  const startLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("token-init-date");
+    dispatch(onLogout());
   };
 
   return {
@@ -93,5 +100,6 @@ export const useAuthStore = () => {
     startLogin,
     startRegister,
     checkAuthToken,
+    startLogout,
   };
 };

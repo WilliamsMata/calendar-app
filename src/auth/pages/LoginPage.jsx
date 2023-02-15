@@ -21,7 +21,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (errorMessage !== undefined) {
-      Swal.fire(error.errorTitle, errorMessage, "error");
+      Swal.fire(error.errorTitle, error.errorText, "error");
     }
   }, [errorMessage]);
 
