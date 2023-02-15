@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, Navigate, Routes } from "react-router-dom";
 import { LoginPage, SignUpPage, AuthLayout } from "../auth";
 import { CalendarPage } from "../calendar";
+import { CheckingAuthSpinner } from "../components";
 import { useAuthStore } from "../hooks";
 
 export const AppRouter = () => {
@@ -12,11 +13,7 @@ export const AppRouter = () => {
   }, []);
 
   if (status === "checking") {
-    return (
-      <>
-        <h2>Cargando</h2>
-      </>
-    );
+    return <CheckingAuthSpinner />;
   }
 
   return (
