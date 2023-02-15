@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { addDays, differenceInSeconds, startOfDay } from "date-fns";
 import Swal from "sweetalert2";
 
-import { useCalendarStore, useLanguage, useUiStore } from "./";
+import { useCalendarStore, useUiStore } from "./";
 import {
   getSavedEventModalMessageEN,
   getSavedEventModalMessageES,
   getSweetModalMessageEN,
   getSweetModalMessageES,
+  isUserDeviceInSpanish,
 } from "../helpers";
 
 const Toast = Swal.mixin({
@@ -22,18 +23,17 @@ const Toast = Swal.mixin({
   },
 });
 
-export const useCalendarModal = () => {
-  const colors = [
-    "#661ae6",
-    "#3abff8",
-    "#1fb2a5",
-    "#fbbd23",
-    "#f87272",
-    "#d926aa",
-  ];
+const colors = [
+  "#661ae6",
+  "#3abff8",
+  "#1fb2a5",
+  "#fbbd23",
+  "#f87272",
+  "#d926aa",
+];
 
+export const useCalendarModal = () => {
   //* HOOKS
-  const { isSpanish } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const { activeEvent, startSavingEvent, clearActiveEvent } =
     useCalendarStore();
@@ -84,11 +84,11 @@ export const useCalendarModal = () => {
     event.preventDefault();
     setFormSubmitted(true);
 
-    const { error } = isSpanish
+    const { error } = isUserDeviceInSpanish
       ? getSweetModalMessageES()
       : getSweetModalMessageEN();
 
-    const savedModalMessage = isSpanish
+    const savedModalMessage = isUserDeviceInSpanish
       ? getSavedEventModalMessageES()
       : getSavedEventModalMessageEN();
 

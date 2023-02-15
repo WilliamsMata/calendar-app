@@ -8,7 +8,7 @@
   }
 
   h1 {
-    @apply text-2xl md:text-4xl;
+    @apply text-2xl;
   }
   h2 {
     @apply text-2xl;

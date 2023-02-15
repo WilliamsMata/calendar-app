@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { useDarkMode, useLanguage } from "../../hooks";
+import { isUserDeviceInSpanish } from "../../helpers";
+import { useDarkMode } from "../../hooks";
 
 export const AuthLayout = () => {
   const { darkMode, switchMode } = useDarkMode();
-  const { isSpanish } = useLanguage();
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4">
@@ -12,7 +12,7 @@ export const AuthLayout = () => {
         <h1>Calendar.io</h1>
       </div>
 
-      <div className="w-full max-w-[25rem] space-y-4 rounded-lg bg-base-100 p-6 drop-shadow-md sm:p-8 md:space-y-6">
+      <div className="w-full max-w-[25rem] space-y-4 rounded-lg bg-base-100 p-6 drop-shadow-md ">
         <Outlet />
       </div>
 
@@ -21,7 +21,7 @@ export const AuthLayout = () => {
         target="_blank"
         className="link-primary link"
       >
-        {isSpanish ? "Código fuente" : "Source Code"}
+        {isUserDeviceInSpanish ? "Código fuente" : "Source Code"}
       </a>
 
       <button

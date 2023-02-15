@@ -8,8 +8,13 @@ import {
   FabAddNew,
   FabDelete,
 } from "../";
-import { getMessageEN, getMessageES, localizer } from "../../helpers";
-import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
+import {
+  getMessageEN,
+  getMessageES,
+  isUserDeviceInSpanish,
+  localizer,
+} from "../../helpers";
+import { useCalendarStore, useUiStore } from "../../hooks";
 
 export const CalendarPage = () => {
   //* HOOKS
@@ -18,7 +23,6 @@ export const CalendarPage = () => {
   );
   const { openDateModal } = useUiStore();
   const { events, setActiveEvent, clearActiveEvent } = useCalendarStore();
-  const { isSpanish } = useLanguage();
 
   //* EVENTS
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -63,8 +67,8 @@ export const CalendarPage = () => {
         defaultView={lastView}
         startAccessor="start"
         endAccessor="end"
-        culture={isSpanish ? "es" : ""}
-        messages={isSpanish ? getMessageES() : getMessageEN()}
+        culture={isUserDeviceInSpanish ? "es" : ""}
+        messages={isUserDeviceInSpanish ? getMessageES() : getMessageEN()}
         eventPropGetter={eventStyleGetter}
         components={{
           event: CalendarEventBox,

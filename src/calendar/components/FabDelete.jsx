@@ -1,9 +1,10 @@
 import Swal from "sweetalert2";
+import { isUserDeviceInSpanish } from "../../helpers";
 import {
   getDeleteSweetModalMessageEN,
   getDeleteSweetModalMessageES,
 } from "../../helpers/getMessages";
-import { useCalendarStore, useLanguage, useUiStore } from "../../hooks";
+import { useCalendarStore, useUiStore } from "../../hooks";
 
 const swalButtons = Swal.mixin({
   customClass: {
@@ -15,15 +16,14 @@ const swalButtons = Swal.mixin({
   buttonsStyling: false,
 });
 
+const { question, cancelled, deleted } = isUserDeviceInSpanish
+  ? getDeleteSweetModalMessageES()
+  : getDeleteSweetModalMessageEN();
+
 export const FabDelete = () => {
   const { isDateModalOpen } = useUiStore();
   const { startDeletingEvent, hasEventSelected, clearActiveEvent } =
     useCalendarStore();
-  const { isSpanish } = useLanguage();
-
-  const { question, cancelled, deleted } = isSpanish
-    ? getDeleteSweetModalMessageES()
-    : getDeleteSweetModalMessageEN();
 
   const onDelete = async () => {
     const result = await swalButtons.fire({

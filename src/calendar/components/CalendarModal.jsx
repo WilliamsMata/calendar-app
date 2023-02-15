@@ -4,25 +4,21 @@ import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import { getFormMessageEN, getFormMessageES } from "../../helpers";
-import { useCalendarModal, useLanguage } from "../../hooks";
+import {
+  getFormMessageEN,
+  getFormMessageES,
+  isUserDeviceInSpanish,
+} from "../../helpers";
+import { useCalendarModal } from "../../hooks";
 import { CloseModalBtn } from "./CloseModalBtn";
 
 registerLocale("es", es);
 Modal.setAppElement("#root");
 
-export const CalendarModal = () => {
-  const { isSpanish } = useLanguage();
-  const {
-    titleForm,
-    dateStart,
-    dateEnd,
-    eventTitle,
-    note,
-    colorLabel,
-    button,
-  } = isSpanish ? getFormMessageES() : getFormMessageEN();
+const { titleForm, dateStart, dateEnd, eventTitle, note, colorLabel, button } =
+  isUserDeviceInSpanish ? getFormMessageES() : getFormMessageEN();
 
+export const CalendarModal = () => {
   const {
     //* Properties
     formValues,
@@ -60,8 +56,8 @@ export const CalendarModal = () => {
               className="input-bordered input w-full"
               dateFormat="Pp"
               showTimeSelect
-              locale={isSpanish ? "es" : null}
-              timeCaption={isSpanish ? "Hora" : "Time"}
+              locale={isUserDeviceInSpanish ? "es" : null}
+              timeCaption={isUserDeviceInSpanish ? "Hora" : "Time"}
             />
           </div>
 
@@ -75,8 +71,8 @@ export const CalendarModal = () => {
               className="input-bordered input w-full"
               dateFormat="Pp"
               showTimeSelect
-              locale={isSpanish ? "es" : null}
-              timeCaption={isSpanish ? "Hora" : "Time"}
+              locale={isUserDeviceInSpanish ? "es" : null}
+              timeCaption={isUserDeviceInSpanish ? "Hora" : "Time"}
             />
           </div>
         </div>

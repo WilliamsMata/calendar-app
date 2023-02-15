@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getSignUpMessageEN, getSingUpMessageES } from "../../helpers";
-import { useAuthStore, useForm, useLanguage } from "../../hooks";
+import {
+  getSignUpMessageEN,
+  getSingUpMessageES,
+  isUserDeviceInSpanish,
+} from "../../helpers";
+import { useAuthStore, useForm } from "../../hooks";
 
 const registerFormFields = {
   registerName: "",
@@ -15,7 +19,6 @@ export const SignUpPage = () => {
   const [isSamePassword, setIsSamePassword] = useState(true);
   const { startRegister, errorMessage } = useAuthStore();
 
-  const { isSpanish } = useLanguage();
   const {
     title,
     name,
@@ -26,7 +29,7 @@ export const SignUpPage = () => {
     text,
     link,
     error,
-  } = isSpanish ? getSingUpMessageES() : getSignUpMessageEN();
+  } = isUserDeviceInSpanish ? getSingUpMessageES() : getSignUpMessageEN();
 
   const {
     registerName,
@@ -66,7 +69,7 @@ export const SignUpPage = () => {
   return (
     <>
       <h1 className="font-bold tracking-tight">{title}</h1>
-      <form className="space-y-4 md:space-y-6" onSubmit={registerSubmit}>
+      <form className="space-y-4" onSubmit={registerSubmit}>
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium  ">
             {name}

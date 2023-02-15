@@ -1,9 +1,8 @@
-import { useAuthStore, useDarkMode, useLanguage } from "../../hooks";
+import { isUserDeviceInSpanish } from "../../helpers";
+import { useAuthStore, useDarkMode } from "../../hooks";
 
 export const Navbar = () => {
   const { darkMode, switchMode } = useDarkMode();
-  const { isSpanish } = useLanguage();
-
   const { startLogout, user } = useAuthStore();
 
   return (
@@ -32,7 +31,7 @@ export const Navbar = () => {
             alt="logout btn"
             className="h-6 w-6 transition"
           />
-          {isSpanish ? "Salir" : "Logout"}
+          {isUserDeviceInSpanish ? "Salir" : "Logout"}
         </button>
       </div>
     </div>

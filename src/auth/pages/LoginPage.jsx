@@ -2,20 +2,22 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import { getLoginMessageEN, getLoginMessageES } from "../../helpers";
-import { useAuthStore, useForm, useLanguage } from "../../hooks";
+import {
+  getLoginMessageEN,
+  getLoginMessageES,
+  isUserDeviceInSpanish,
+} from "../../helpers";
+import { useAuthStore, useForm } from "../../hooks";
 
 const loginFormFields = {
   loginEmail: "",
   loginPassword: "",
 };
 
-export const LoginPage = () => {
-  const { isSpanish } = useLanguage();
-  const { title, email, password, button, text, link, error } = isSpanish
-    ? getLoginMessageES()
-    : getLoginMessageEN();
+const { title, email, password, button, text, link, error } =
+  isUserDeviceInSpanish ? getLoginMessageES() : getLoginMessageEN();
 
+export const LoginPage = () => {
   const { loginEmail, loginPassword, onInputChange } = useForm(loginFormFields);
   const { startLogin, errorMessage } = useAuthStore();
 

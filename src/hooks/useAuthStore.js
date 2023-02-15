@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { calendarApi } from "../api";
-import { getLoginMessageEN, getLoginMessageES } from "../helpers";
+import {
+  getLoginMessageEN,
+  getLoginMessageES,
+  isUserDeviceInSpanish,
+} from "../helpers";
 import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store";
-import { useLanguage } from "./useLanguage";
+
+const loginMessage = isUserDeviceInSpanish
+  ? getLoginMessageES()
+  : getLoginMessageEN();
 
 export const useAuthStore = () => {
-  const { isSpanish } = useLanguage();
-  const loginMessage = isSpanish ? getLoginMessageES() : getLoginMessageEN();
-
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
