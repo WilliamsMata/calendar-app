@@ -15,21 +15,21 @@ const registerFormFields = {
   registerPassword2: "",
 };
 
+const {
+  title,
+  name,
+  email,
+  password,
+  repeatPassword,
+  button,
+  text,
+  link,
+  error,
+} = isUserDeviceInSpanish ? getSingUpMessageES() : getSignUpMessageEN();
+
 export const SignUpPage = () => {
   const [isSamePassword, setIsSamePassword] = useState(true);
   const { startRegister, errorMessage } = useAuthStore();
-
-  const {
-    title,
-    name,
-    email,
-    password,
-    repeatPassword,
-    button,
-    text,
-    link,
-    error,
-  } = isUserDeviceInSpanish ? getSingUpMessageES() : getSignUpMessageEN();
 
   const {
     registerName,
