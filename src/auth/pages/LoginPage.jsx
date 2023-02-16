@@ -53,10 +53,7 @@ export const LoginPage = () => {
         </div>
 
         <div>
-          <label
-            htmlFor="password"
-            className="mb-2 block text-sm font-medium  "
-          >
+          <label htmlFor="password" className="mb-2 block text-sm font-medium">
             {password}
           </label>
           <input
