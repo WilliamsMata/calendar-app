@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { calendarApi } from "../api";
 import {
+  getDeleteSweetModalMessageEN,
+  getDeleteSweetModalMessageES,
   getSavedEventModalMessageEN,
   getSavedEventModalMessageES,
   isUserDeviceInSpanish,
@@ -28,9 +30,23 @@ const Toast = Swal.mixin({
   },
 });
 
-const { savedMsg, errorMsg } = isUserDeviceInSpanish
+const swalButtons = Swal.mixin({
+  customClass: {
+    confirmButton:
+      "btn btn-info min-w-[5rem] mx-2 transition hover:brightness-110",
+    cancelButton:
+      "btn btn-error min-w-[5rem] mx-2 transition hover:brightness-110",
+  },
+  buttonsStyling: false,
+});
+
+const { savedMsg, errorEditMsg, errorDeleteMsg } = isUserDeviceInSpanish
   ? getSavedEventModalMessageES()
   : getSavedEventModalMessageEN();
+
+const { deleted } = isUserDeviceInSpanish
+  ? getDeleteSweetModalMessageES()
+  : getDeleteSweetModalMessageEN();
 
 export const useCalendarStore = () => {
   const dispatch = useDispatch();
@@ -78,8 +94,8 @@ export const useCalendarStore = () => {
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title: errorMsg.title,
-        text: errorMsg.text,
+        title: errorEditMsg.title,
+        text: errorEditMsg.text,
         icon: "error",
         buttonsStyling: false,
         width: "35rem",
@@ -92,8 +108,24 @@ export const useCalendarStore = () => {
 
   const startDeletingEvent = async () => {
     //Todo: Llegar al backend
+    try {
+      await calendarApi.delete(`events/${activeEvent.id}`);
 
-    dispatch(onDeleteEvent());
+      dispatch(onDeleteEvent());
+      swalButtons.fire(deleted.title, deleted.text, "success");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: errorDeleteMsg.title,
+        text: errorDeleteMsg.text,
+        icon: "error",
+        buttonsStyling: false,
+        width: "35rem",
+        customClass: {
+          confirmButton: "btn btn-error",
+        },
+      });
+    }
   };
 
   const clearActiveEvent = () => {

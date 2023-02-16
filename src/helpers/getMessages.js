@@ -206,9 +206,13 @@ export const getDeleteSweetModalMessageES = () => {
 export const getSavedEventModalMessageES = () => {
   return {
     savedMsg: "Guardado correctamente",
-    errorMsg: {
+    errorEditMsg: {
       title: "Error al guardar",
       text: "No tienes los privilegios para editar este evento",
+    },
+    errorDeleteMsg: {
+      title: "Error al eliminar",
+      text: "No tienes los privilegios para eliminar este evento",
     },
   };
 };
@@ -216,9 +220,13 @@ export const getSavedEventModalMessageES = () => {
 export const getSavedEventModalMessageEN = () => {
   return {
     savedMsg: "Saved successfully",
-    errorMsg: {
+    errorEditMsg: {
       title: "Failed to save",
-      text: "You do not have the privileges to edit this event",
+      text: "You don't have the privileges to edit this event",
+    },
+    errorDeleteMsg: {
+      title: "Failed to delete",
+      text: "You don't have the privileges to delete this event",
     },
   };
 };

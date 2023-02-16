@@ -16,7 +16,7 @@ const swalButtons = Swal.mixin({
   buttonsStyling: false,
 });
 
-const { question, cancelled, deleted } = isUserDeviceInSpanish
+const { question, cancelled } = isUserDeviceInSpanish
   ? getDeleteSweetModalMessageES()
   : getDeleteSweetModalMessageEN();
 
@@ -38,8 +38,6 @@ export const FabDelete = () => {
 
     if (result.isConfirmed) {
       await startDeletingEvent();
-
-      swalButtons.fire(deleted.title, deleted.text, "success");
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       swalButtons.fire(cancelled.title, cancelled.text, "error");
     }
