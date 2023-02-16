@@ -8,6 +8,8 @@ import {
   getSweetModalMessageES,
   isUserDeviceInSpanish,
 } from "../helpers";
+import { useDispatch } from "react-redux";
+import { onSavingEvent } from "../store";
 
 const colors = [
   "#661ae6",
@@ -18,8 +20,13 @@ const colors = [
   "#d926aa",
 ];
 
+const { error } = isUserDeviceInSpanish
+  ? getSweetModalMessageES()
+  : getSweetModalMessageEN();
+
 export const useCalendarModal = () => {
   //* HOOKS
+  const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const { activeEvent, startSavingEvent, clearActiveEvent } =
     useCalendarStore();
@@ -69,10 +76,7 @@ export const useCalendarModal = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-
-    const { error } = isUserDeviceInSpanish
-      ? getSweetModalMessageES()
-      : getSweetModalMessageEN();
+    dispatch(onSavingEvent());
 
     const timeDifference = differenceInSeconds(
       formValues.end,

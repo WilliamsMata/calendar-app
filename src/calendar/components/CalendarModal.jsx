@@ -11,6 +11,8 @@ import {
 } from "../../helpers";
 import { useCalendarModal } from "../../hooks";
 import { CloseModalBtn } from "./CloseModalBtn";
+import { useSelector } from "react-redux";
+import { LoaderSpinnerIcon } from "./LoaderSpinnerIcon";
 
 registerLocale("es", es);
 Modal.setAppElement("#root");
@@ -19,6 +21,8 @@ const { titleForm, dateStart, dateEnd, eventTitle, note, colorLabel, button } =
   isUserDeviceInSpanish ? getFormMessageES() : getFormMessageEN();
 
 export const CalendarModal = () => {
+  const { isSavingEvent } = useSelector((state) => state.calendar);
+
   const {
     //* Properties
     formValues,
@@ -142,14 +146,21 @@ export const CalendarModal = () => {
           <button
             id="save-btn"
             type="submit"
-            className="btn-outline btn-info btn-block btn mt-2"
+            className="btn-outline btn-info btn-block btn mt-2 disabled:bg-base-300"
+            disabled={isSavingEvent}
           >
-            <img
-              src="save.svg"
-              alt="save logo"
-              className="mr-4 h-6 w-6 transition"
-            />
-            <span className="tracking-wider">{button}</span>
+            {isSavingEvent ? (
+              <LoaderSpinnerIcon />
+            ) : (
+              <>
+                <img
+                  src="save.svg"
+                  alt="save logo"
+                  className="mr-4 h-6 w-6 transition"
+                />
+                <span className="tracking-wider">{button}</span>
+              </>
+            )}
           </button>
         </div>
       </form>
