@@ -1,5 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { calendarApi } from "../api";
+import {
+  getSavedEventModalMessageEN,
+  getSavedEventModalMessageES,
+  isUserDeviceInSpanish,
+} from "../helpers";
 import { convertEventsToDateEvents } from "../helpers/convertEventsToDateEvents";
 import {
   onAddNewEvent,
@@ -9,6 +15,22 @@ import {
   onClearActiveEvent,
   onLoadEvents,
 } from "../store";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
+const { savedMsg, errorMsg } = isUserDeviceInSpanish
+  ? getSavedEventModalMessageES()
+  : getSavedEventModalMessageEN();
 
 export const useCalendarStore = () => {
   const dispatch = useDispatch();
@@ -32,18 +54,39 @@ export const useCalendarStore = () => {
   };
 
   const startSavingEvent = async (calendarEvent) => {
-    //Todo: Llegar al backend
+    try {
+      if (calendarEvent.id) {
+        // Updating event
+        await calendarApi.put(`/events/${calendarEvent.id}`, calendarEvent);
+        dispatch(onUpdateEvent({ ...calendarEvent, user }));
 
-    // All good
-    if (calendarEvent._id) {
-      // Updating
-      dispatch(onUpdateEvent({ ...calendarEvent }));
-    } else {
-      // Creating
+        Toast.fire({
+          icon: "success",
+          title: savedMsg,
+        });
+        return;
+      }
+
+      // Creating event
       const { data } = await calendarApi.post("/events", calendarEvent);
-      console.log({ data });
-
       dispatch(onAddNewEvent({ ...calendarEvent, id: data.evento.id, user }));
+
+      Toast.fire({
+        icon: "success",
+        title: savedMsg,
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: errorMsg.title,
+        text: errorMsg.text,
+        icon: "error",
+        buttonsStyling: false,
+        width: "35rem",
+        customClass: {
+          confirmButton: "btn btn-error",
+        },
+      });
     }
   };
 

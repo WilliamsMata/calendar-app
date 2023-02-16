@@ -4,24 +4,10 @@ import Swal from "sweetalert2";
 
 import { useCalendarStore, useUiStore } from "./";
 import {
-  getSavedEventModalMessageEN,
-  getSavedEventModalMessageES,
   getSweetModalMessageEN,
   getSweetModalMessageES,
   isUserDeviceInSpanish,
 } from "../helpers";
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener("mouseenter", Swal.stopTimer);
-    toast.addEventListener("mouseleave", Swal.resumeTimer);
-  },
-});
 
 const colors = [
   "#661ae6",
@@ -88,10 +74,6 @@ export const useCalendarModal = () => {
       ? getSweetModalMessageES()
       : getSweetModalMessageEN();
 
-    const savedModalMessage = isUserDeviceInSpanish
-      ? getSavedEventModalMessageES()
-      : getSavedEventModalMessageEN();
-
     const timeDifference = differenceInSeconds(
       formValues.end,
       formValues.start
@@ -119,10 +101,6 @@ export const useCalendarModal = () => {
     closeDateModal();
     clearActiveEvent();
     setFormSubmitted(false);
-    Toast.fire({
-      icon: "success",
-      title: savedModalMessage,
-    });
   };
 
   const handleColorClick = (color) => {

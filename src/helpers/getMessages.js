@@ -204,9 +204,21 @@ export const getDeleteSweetModalMessageES = () => {
 };
 
 export const getSavedEventModalMessageES = () => {
-  return "Guardado correctamente";
+  return {
+    savedMsg: "Guardado correctamente",
+    errorMsg: {
+      title: "Error al guardar",
+      text: "No tienes los privilegios para editar este evento",
+    },
+  };
 };
 
 export const getSavedEventModalMessageEN = () => {
-  return "Saved successfully";
+  return {
+    savedMsg: "Saved successfully",
+    errorMsg: {
+      title: "Failed to save",
+      text: "You do not have the privileges to edit this event",
+    },
+  };
 };
