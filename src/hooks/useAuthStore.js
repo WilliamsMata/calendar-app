@@ -5,7 +5,13 @@ import {
   getLoginMessageES,
   isUserDeviceInSpanish,
 } from "../helpers";
-import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store";
+import {
+  clearErrorMessage,
+  onChecking,
+  onLogin,
+  onLogout,
+  onLogoutCalendar,
+} from "../store";
 
 const loginMessage = isUserDeviceInSpanish
   ? getLoginMessageES()
@@ -90,6 +96,7 @@ export const useAuthStore = () => {
   const startLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("token-init-date");
+    dispatch(onLogoutCalendar());
     dispatch(onLogout());
   };
 
