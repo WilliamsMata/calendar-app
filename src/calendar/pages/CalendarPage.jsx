@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Calendar } from "react-big-calendar";
 
 import {
@@ -22,7 +22,12 @@ export const CalendarPage = () => {
     localStorage.getItem("lastView") || "month"
   );
   const { openDateModal } = useUiStore();
-  const { events, setActiveEvent, clearActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, clearActiveEvent, startLoadingEvents } =
+    useCalendarStore();
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   //* EVENTS
   const eventStyleGetter = (event, start, end, isSelected) => {
