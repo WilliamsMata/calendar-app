@@ -95,6 +95,7 @@ export const useCalendarModal = () => {
         },
       });
       document.querySelector("#date-end").classList.add("input-error");
+      dispatch(toggleSavingEvent());
       return;
     }
 
