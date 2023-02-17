@@ -99,7 +99,10 @@ export const useCalendarModal = () => {
       return;
     }
 
-    if (formValues.title.length <= 0) return;
+    if (formValues.title.length <= 0) {
+      dispatch(toggleSavingEvent());
+      return;
+    }
 
     await startSavingEvent(formValues);
 
