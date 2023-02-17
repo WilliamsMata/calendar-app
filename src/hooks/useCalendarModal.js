@@ -9,7 +9,7 @@ import {
   isUserDeviceInSpanish,
 } from "../helpers";
 import { useDispatch } from "react-redux";
-import { onSavingEvent } from "../store";
+import { toggleSavingEvent } from "../store";
 
 const colors = [
   "#661ae6",
@@ -76,7 +76,7 @@ export const useCalendarModal = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-    dispatch(onSavingEvent());
+    dispatch(toggleSavingEvent());
 
     const timeDifference = differenceInSeconds(
       formValues.end,

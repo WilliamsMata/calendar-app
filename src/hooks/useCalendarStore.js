@@ -16,6 +16,7 @@ import {
   onUpdateEvent,
   onClearActiveEvent,
   onLoadEvents,
+  toggleSavingEvent,
 } from "../store";
 
 const Toast = Swal.mixin({
@@ -103,6 +104,7 @@ export const useCalendarStore = () => {
           confirmButton: "btn btn-error",
         },
       });
+      dispatch(toggleSavingEvent());
     }
   };
 

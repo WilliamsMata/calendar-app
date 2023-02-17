@@ -54,8 +54,8 @@ export const calendarSlice = createSlice({
       state.activeEvent = null;
       state.isSavingEvent = false;
     },
-    onSavingEvent: (state) => {
-      state.isSavingEvent = true;
+    toggleSavingEvent: (state) => {
+      state.isSavingEvent = !state.isSavingEvent;
     },
   },
 });
@@ -69,5 +69,5 @@ export const {
   onDeleteEvent,
   onClearActiveEvent,
   onLogoutCalendar,
-  onSavingEvent,
+  toggleSavingEvent,
 } = calendarSlice.actions;
