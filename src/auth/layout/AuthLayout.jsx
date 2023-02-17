@@ -8,7 +8,11 @@ export const AuthLayout = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4">
       <div className="flex items-center justify-center gap-2">
-        <img src="../calendar.svg" alt="calendar image" className="h-8 w-8" />
+        <img
+          src="../icons/calendar.svg"
+          alt="calendar image"
+          className="h-8 w-8"
+        />
         <h1>Calendar.io</h1>
       </div>
 
@@ -29,9 +33,9 @@ export const AuthLayout = () => {
         onClick={switchMode}
       >
         {darkMode ? (
-          <img src="../sun.svg" alt="light mode" className="h-6 w-6" />
+          <img src="../icons/sun.svg" alt="light mode" className="h-6 w-6" />
         ) : (
-          <img src="../moon.svg" alt="dark mode" className="h-6 w-6" />
+          <img src="../icons/moon.svg" alt="dark mode" className="h-6 w-6" />
         )}
       </button>
     </div>

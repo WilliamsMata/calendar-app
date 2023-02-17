@@ -26,7 +26,11 @@ export const FabAddNew = () => {
       onClick={onAddNewClick}
       className="btn-info btn-circle btn-lg btn fixed right-4 bottom-4 transition hover:brightness-105 lg:right-8 lg:bottom-6"
     >
-      <img src="add.svg" alt="add button" className="h-8 w-8 transition" />
+      <img
+        src="./icons/add.svg"
+        alt="add button"
+        className="h-8 w-8 transition"
+      />
     </button>
   );
 };

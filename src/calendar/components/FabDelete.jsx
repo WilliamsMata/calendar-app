@@ -53,7 +53,11 @@ export const FabDelete = () => {
         hasEventSelected ? "" : "hidden"
       } ${isDateModalOpen ? "hidden" : ""}`}
     >
-      <img src="trash.svg" alt="delete button" className="h-8 w-8 transition" />
+      <img
+        src="./icons/trash.svg"
+        alt="delete button"
+        className="h-8 w-8 transition"
+      />
     </button>
   );
 };

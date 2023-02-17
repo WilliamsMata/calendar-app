@@ -154,7 +154,7 @@ export const CalendarModal = () => {
             ) : (
               <>
                 <img
-                  src="save.svg"
+                  src="./icons/save.svg"
                   alt="save logo"
                   className="mr-4 h-6 w-6 transition"
                 />
