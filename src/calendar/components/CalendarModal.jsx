@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import es from "date-fns/locale/es";
+import { startOfDay } from "date-fns";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import {
@@ -55,6 +56,7 @@ export const CalendarModal = () => {
             <label className="label">{dateStart.label}</label>
             <DatePicker
               id="date-start"
+              minDate={startOfDay(new Date())}
               selected={formValues.start}
               onChange={(event) => onDateChange(event, "start")}
               className="input-bordered input w-full"
