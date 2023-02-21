@@ -16,3 +16,7 @@ require("dotenv").config({
 jest.mock("./src/helpers/getEnvVariables", () => ({
   getEnvVariables: () => ({ ...process.env }),
 }));
+
+// Para los componentes de react se rendericen
+import React from "react";
+global.React = React;
