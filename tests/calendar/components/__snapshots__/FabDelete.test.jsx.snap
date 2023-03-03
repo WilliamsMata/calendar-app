@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in <FabDelete /> Should display the component correctly 1`] = `
+<div>
+  <button
+    class="btn-error btn-circle btn-lg btn fixed left-4 bottom-4 transition hover:brightness-105 lg:left-8 lg:bottom-6 hidden "
+    id="delete-btn"
+  >
+    <img
+      alt="delete button"
+      class="h-8 w-8 transition"
+      src="./icons/trash.svg"
+    />
+  </button>
+</div>
+`;
