@@ -1,8 +1,8 @@
+import { DarkModeBtn } from "../../components";
 import { isUserDeviceInSpanish } from "../../helpers";
-import { useAuthStore, useDarkMode } from "../../hooks";
+import { useAuthStore } from "../../hooks";
 
 export const Navbar = () => {
-  const { darkMode, switchMode } = useDarkMode();
   const { startLogout, user } = useAuthStore();
 
   return (
@@ -17,13 +17,7 @@ export const Navbar = () => {
       </div>
 
       <div className="flex gap-4">
-        <button className="btn-circle btn" onClick={switchMode}>
-          {darkMode ? (
-            <img src="./icons/sun.svg" alt="light mode" className="h-6 w-6" />
-          ) : (
-            <img src="./icons/moon.svg" alt="dark mode" className="h-6 w-6" />
-          )}
-        </button>
+        <DarkModeBtn />
 
         <button
           onClick={startLogout}

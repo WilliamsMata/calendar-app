@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { DarkModeBtn } from "../../components";
 import { isUserDeviceInSpanish } from "../../helpers";
 import { useDarkMode } from "../../hooks";
 
@@ -28,16 +29,7 @@ export const AuthLayout = () => {
         {isUserDeviceInSpanish ? "Código fuente" : "Source Code"}
       </a>
 
-      <button
-        className="btn-circle btn fixed right-4 top-4"
-        onClick={switchMode}
-      >
-        {darkMode ? (
-          <img src="../icons/sun.svg" alt="light mode" className="h-6 w-6" />
-        ) : (
-          <img src="../icons/moon.svg" alt="dark mode" className="h-6 w-6" />
-        )}
-      </button>
+      <DarkModeBtn className="fixed right-4 top-4" />
     </div>
   );
 };
