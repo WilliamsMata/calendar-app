@@ -1,11 +1,9 @@
 import { Outlet } from "react-router-dom";
+
 import { DarkModeBtn } from "../../components";
 import { isUserDeviceInSpanish } from "../../helpers";
-import { useDarkMode } from "../../hooks";
 
 export const AuthLayout = () => {
-  const { darkMode, switchMode } = useDarkMode();
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4">
       <div className="flex items-center justify-center gap-2">
@@ -17,7 +15,7 @@ export const AuthLayout = () => {
         <h1>Calendar.io</h1>
       </div>
 
-      <div className="w-full max-w-[25rem] space-y-4 rounded-lg bg-base-100 p-6 drop-shadow-md ">
+      <div className="w-full max-w-[25rem] space-y-4 rounded-lg bg-base-100 p-6 drop-shadow-md">
         <Outlet />
       </div>
 
