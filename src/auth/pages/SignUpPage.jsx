@@ -148,6 +148,7 @@ export const SignUpPage = () => {
         >
           {button}
         </button>
+
         <p className="text-sm font-light">
           {text}
           <Link to="/auth/login" className="link-info link font-bold">

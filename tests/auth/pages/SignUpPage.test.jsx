@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
+import { SignUpPage } from "../../../src/auth/pages/SignUpPage";
+import { useAuthStore } from "../../../src/hooks";
 
-import { LoginPage } from "../../../src/auth/pages/LoginPage";
-import { useAuthStore } from "../../../src/hooks/useAuthStore";
 import { authSlice } from "../../../src/store";
 import { notAuthenticatedState } from "../../__fixtures__/authState";
 
@@ -17,7 +17,7 @@ const store = configureStore({
   },
 });
 
-const mockStartLogin = jest.fn();
+const mockStartRegister = jest.fn();
 jest.mock("../../../src/hooks/useAuthStore");
 
 jest.mock("react-redux", () => ({
@@ -25,56 +25,68 @@ jest.mock("react-redux", () => ({
   useDispatch: () => (fn) => fn(),
 }));
 
-describe("Test in <LoginPage />", () => {
+describe("Test in <SignUpPage />", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("should show the component correctly", () => {
     useAuthStore.mockReturnValue({
-      startLogin: mockStartLogin,
+      startRegister: mockStartRegister,
       errorMessage: undefined,
     });
 
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <LoginPage />
+          <SignUpPage />
         </MemoryRouter>
       </Provider>
     );
 
-    expect(screen.getAllByText("Log in").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Create a new account")).toBeTruthy();
   });
 
-  test("startLogin should be called when submitting the form", () => {
+  test("startRegister should be called when submitting the form", () => {
     useAuthStore.mockReturnValue({
-      startLogin: mockStartLogin,
+      startRegister: mockStartRegister,
       errorMessage: undefined,
     });
 
+    const name = "Williams";
     const email = "williams.rm99@gmail.com";
-    const password = "password";
+    const password = "newPassword";
+    const password2 = "newPassword";
 
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <LoginPage />
+          <SignUpPage />
         </MemoryRouter>
       </Provider>
     );
+
+    const nameField = screen.getByRole("textbox", { name: "Your name" });
+    fireEvent.change(nameField, {
+      target: { name: "registerName", value: name },
+    });
 
     const emailField = screen.getByRole("textbox", { name: "Your email" });
     fireEvent.change(emailField, {
-      target: { name: "loginEmail", value: email },
+      target: { name: "registerEmail", value: email },
     });
 
-    const passwordField = screen.getByLabelText("password");
+    const passwordField = screen.getByLabelText("Password");
     fireEvent.change(passwordField, {
-      target: { name: "loginPassword", value: password },
+      target: { name: "registerPassword", value: password },
     });
 
-    const loginBtn = screen.getByLabelText("login-button");
-    fireEvent.click(loginBtn);
+    const passwordField2 = screen.getByLabelText("Confirm password");
+    fireEvent.change(passwordField2, {
+      target: { name: "registerPassword2", value: password2 },
+    });
 
-    expect(mockStartLogin).toHaveBeenCalledWith({ email, password });
+    const signUpBtn = screen.getByRole("button");
+    fireEvent.click(signUpBtn);
+
+    expect(mockStartRegister).toHaveBeenCalledWith({ name, email, password });
   });
 });
