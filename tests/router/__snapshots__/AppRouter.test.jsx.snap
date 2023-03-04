@@ -90,6 +90,7 @@ exports[`Test in <AppRouter /> should show login if status is not-authenticated 
             Password
           </label>
           <input
+            aria-label="password"
             class="input-bordered input-info input w-full"
             id="password"
             name="loginPassword"
@@ -100,6 +101,7 @@ exports[`Test in <AppRouter /> should show login if status is not-authenticated 
           />
         </div>
         <button
+          aria-label="login-button"
           class="btn-info btn w-full transition hover:brightness-110"
           type="submit"
         >
@@ -131,7 +133,7 @@ exports[`Test in <AppRouter /> should show login if status is not-authenticated 
       <img
         alt="light mode"
         class="h-6 w-6"
-        src="../icons/sun.svg"
+        src="[object Object]"
       />
     </button>
   </div>
