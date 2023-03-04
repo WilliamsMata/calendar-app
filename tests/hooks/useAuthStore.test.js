@@ -222,7 +222,6 @@ describe("Test in useAuthStore.js", () => {
     });
 
     const { errorMessage, status, user, isChecking } = result.current;
-    console.log({ errorMessage, status, user, isChecking });
 
     expect({ errorMessage, status, user, isChecking }).toStrictEqual({
       errorMessage: undefined,

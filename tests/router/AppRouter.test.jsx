@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { CalendarPage } from "../../src/calendar";
 
 import { useAuthStore } from "../../src/hooks/useAuthStore";
 import { AppRouter } from "../../src/router/AppRouter";
@@ -66,8 +65,6 @@ describe("Test in <AppRouter />", () => {
         <AppRouter />
       </MemoryRouter>
     );
-
-    screen.debug();
 
     expect(screen.getByText("Calendar Page")).toBeTruthy();
   });
