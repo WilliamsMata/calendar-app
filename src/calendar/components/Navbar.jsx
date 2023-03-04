@@ -20,6 +20,7 @@ export const Navbar = () => {
         <DarkModeBtn />
 
         <button
+          aria-label="logout-btn"
           onClick={startLogout}
           id="logout-btn"
           className="btn-outline btn-error btn gap-2"
