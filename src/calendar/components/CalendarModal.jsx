@@ -6,6 +6,7 @@ import { startOfDay } from "date-fns";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import {
+  getEnvVariables,
   getFormMessageEN,
   getFormMessageES,
   isUserDeviceInSpanish,
@@ -16,7 +17,10 @@ import { useSelector } from "react-redux";
 import { LoaderSpinnerIcon } from "./LoaderSpinnerIcon";
 
 registerLocale("es", es);
-Modal.setAppElement("#root");
+
+if (getEnvVariables().VITE_MODE !== "test") {
+  Modal.setAppElement("#root");
+}
 
 const { titleForm, dateStart, dateEnd, eventTitle, note, colorLabel, button } =
   isUserDeviceInSpanish ? getFormMessageES() : getFormMessageEN();
