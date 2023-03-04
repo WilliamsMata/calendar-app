@@ -60,6 +60,7 @@ export const LoginPage = () => {
             type="password"
             id="password"
             name="loginPassword"
+            aria-label="password"
             value={loginPassword}
             onChange={onInputChange}
             placeholder="••••••••"
@@ -69,6 +70,7 @@ export const LoginPage = () => {
         </div>
 
         <button
+          aria-label="login-button"
           type="submit"
           className="btn-info btn w-full transition hover:brightness-110"
         >
