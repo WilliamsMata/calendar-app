@@ -18,5 +18,6 @@ module.exports = {
   // ModuleNameMapper sólo si ocupamos importar CSS en nuestros componentes para el testing
   moduleNameMapper: {
     "\\.(css|less)$": "<rootDir>/tests/__mocks__/styleMock.js",
+    "\\.(svg)$": "<rootDir>/tests/__mocks__/svgMock.js",
   },
 };
