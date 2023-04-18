@@ -1,9 +1,26 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Route, Navigate, Routes } from "react-router-dom";
-import { LoginPage, SignUpPage, AuthLayout } from "../auth";
-import { CalendarPage } from "../calendar";
+import { AuthLayout } from "../auth";
 import { CheckingAuthSpinner } from "../components";
 import { useAuthStore } from "../hooks";
+
+const LoginPage = lazy(() =>
+  import("../auth/pages/LoginPage").then((module) => {
+    return { default: module.LoginPage };
+  })
+);
+
+const SignUpPage = lazy(() =>
+  import("../auth/pages/SignUpPage").then((module) => {
+    return { default: module.SignUpPage };
+  })
+);
+
+const CalendarPage = lazy(() =>
+  import("../calendar/pages/CalendarPage").then((module) => {
+    return { default: module.CalendarPage };
+  })
+);
 
 export const AppRouter = () => {
   const { status, checkAuthToken } = useAuthStore();
@@ -17,21 +34,23 @@ export const AppRouter = () => {
   }
 
   return (
-    <Routes>
-      {status === "not-authenticated" ? (
-        <>
-          <Route path="/auth/" element={<AuthLayout />}>
-            <Route path="/auth/login" element={<LoginPage />} />
-            <Route path="/auth/signup" element={<SignUpPage />} />
-          </Route>
-          <Route path="/*" element={<Navigate to="/auth/login" />} />
-        </>
-      ) : (
-        <>
-          <Route path="/" element={<CalendarPage />} />
-          <Route path="/*" element={<Navigate to="/" />} />
-        </>
-      )}
-    </Routes>
+    <Suspense fallback={<CheckingAuthSpinner />}>
+      <Routes>
+        {status === "not-authenticated" ? (
+          <>
+            <Route path="/auth/" element={<AuthLayout />}>
+              <Route path="/auth/login" element={<LoginPage />} />
+              <Route path="/auth/signup" element={<SignUpPage />} />
+            </Route>
+            <Route path="/*" element={<Navigate to="/auth/login" />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<CalendarPage />} />
+            <Route path="/*" element={<Navigate to="/" />} />
+          </>
+        )}
+      </Routes>
+    </Suspense>
   );
 };

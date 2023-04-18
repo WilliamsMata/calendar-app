@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 
-import { DarkModeBtn } from "../../components";
+import { CheckingAuthSpinner, DarkModeBtn } from "../../components";
 import { isUserDeviceInSpanish } from "../../helpers";
+import { Suspense } from "react";
 
 export const AuthLayout = () => {
   return (
@@ -16,7 +17,9 @@ export const AuthLayout = () => {
       </div>
 
       <div className="w-full max-w-[25rem] space-y-4 rounded-lg bg-base-100 p-6 drop-shadow-md">
-        <Outlet />
+        <Suspense fallback={<CheckingAuthSpinner isFullScreen={false} />}>
+          <Outlet />
+        </Suspense>
       </div>
 
       <a

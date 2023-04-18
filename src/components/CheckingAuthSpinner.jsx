@@ -1,6 +1,10 @@
-export const CheckingAuthSpinner = () => {
+export const CheckingAuthSpinner = ({ isFullScreen = true }) => {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div
+      className={`flex items-center justify-center ${
+        isFullScreen ? "min-h-screen" : ""
+      }`}
+    >
       <div className="inline-block h-16 w-16 animate-spin" role="status">
         <svg
           fill="#02b9fc"

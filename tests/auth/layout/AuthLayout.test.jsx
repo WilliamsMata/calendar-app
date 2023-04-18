@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 
-import { notAuthenticatedState } from "../../../../08-journal-app/test/fixtures/authFixtures";
+import { notAuthenticatedState } from "../../__fixtures__/authState";
 import { AuthLayout } from "../../../src/auth/layout/AuthLayout";
 import { useDarkMode } from "../../../src/hooks/useDarkMode";
 import { authSlice } from "../../../src/store";

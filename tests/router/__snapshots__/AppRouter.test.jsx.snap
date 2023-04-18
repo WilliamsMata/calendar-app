@@ -3,7 +3,7 @@
 exports[`Test in <AppRouter /> should show loading screen and call checkAuthToken 1`] = `
 <div>
   <div
-    class="flex min-h-screen items-center justify-center"
+    class="flex items-center justify-center min-h-screen"
   >
     <div
       class="inline-block h-16 w-16 animate-spin"
